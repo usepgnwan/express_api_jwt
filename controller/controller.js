@@ -17,13 +17,11 @@ const getAllUser = (req, res) => {
     const queries = "Select * From users";
     connection.query(queries, (err, results, fields) => {
         if (err) throw err;
-        res.send(JSON.stringify(
-            {
+        res.send({
                 "status": 200,
                 "error": null,
                 "response": results
-            }
-        ));
+            });
     });
 }
 const getUserId = (req, res) => {

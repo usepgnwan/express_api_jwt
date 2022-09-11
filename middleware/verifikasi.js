@@ -7,8 +7,11 @@ const verifikasi = () => {
         console.log(tokenWithBarier);
         if (tokenWithBarier) {
             var token = tokenWithBarier;
-            console.log(token);
+            token = token.split(' ');
+            token = token[1];
+            // console.log(token);
             jwt.verify(token, config.secret, (err, decode) => {
+                // res.send(token);
                 if (err) {
                     res.status(400).send(JSON.stringify({
                         "status": 400,
@@ -24,13 +27,11 @@ const verifikasi = () => {
             // req.auth = decode;
             // next();
         } else {
-            res.send(JSON.stringify(
-                {
-                    "status": 400,
-                    "msg": "err",
-                    "response": "Token Tidak Tersedia."
-                }
-            ));
+            res.send(JSON.stringify({
+                "status": 400,
+                "msg": "err",
+                "response": "Token Tidak Tersedia."
+            }));
         }
     }
 }

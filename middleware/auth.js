@@ -10,25 +10,21 @@ const login = (req, res) => {
     connection.query(queri, [email, md5(password)], (error, results, field) => {
         if (results.length != 0) {
             const token = jwt.sign({ results }, config.secret, {
-                expiresIn: 100
+                expiresIn: 1000000
             });
-            res.send(JSON.stringify(
-                {
-                    "status": 200,
-                    "msg": "success",
-                    "response": "Berhasil Login",
-                    "ip": ip.address(),
-                    token: token
-                }
-            ));
+            res.send({
+                "status": 200,
+                "msg": "success",
+                "response": "Berhasil Login",
+                "ip": ip.address(),
+                token: token
+            });
         } else {
-            res.send(JSON.stringify(
-                {
-                    "status": 400,
-                    "msg": "err",
-                    "response": "email Atau Password Salah."
-                }
-            ));
+            res.send({
+                "status": 400,
+                "msg": "err",
+                "response": "email Atau Password Salah."
+            });
         }
     });
 }
